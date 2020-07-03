@@ -9,7 +9,7 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin(),
     new CopyPlugin([{ from: "../build", to: "build" }]),
   ],
-  entry: slsw.lib.entries,
+  entry: { ...slsw.lib.entries, localServer: "./localServer.js" },
   mode: "development",
   name: "server",
   devtool: "nosources-source-map",
