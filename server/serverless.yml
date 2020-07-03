@@ -1,0 +1,27 @@
+service: foh-ssr
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-offline-plus-static
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  packager: 'npm'
+
+custom:
+  webpack:
+    webpackConfig: ../ssrwebpack.config.js
+    includeModules: false
+  custom:
+    localDevStaticFolder: ../.webpack/build/static
+
+functions:
+  app:
+    handler: ./server.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
