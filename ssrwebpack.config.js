@@ -4,16 +4,12 @@ const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const { isEmpty } = require("ramda");
 const CopyPlugin = require("copy-webpack-plugin");
 
-const entry = isEmpty(slsw.lib.entries)
-  ? "./server/server.js"
-  : slsw.lib.entries;
-console.log(entry, slsw.lib.entries);
 module.exports = {
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
     new CopyPlugin([{ from: "../build", to: "build" }]),
   ],
-  entry,
+  entry: slsw.lib.entries,
   mode: "development",
   name: "server",
   devtool: "nosources-source-map",
